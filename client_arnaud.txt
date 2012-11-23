@@ -1,0 +1,706 @@
+SQL> create database link to_serveur connect to arnaud identified by arnaud using 'BD_AURLIEN';
+Lien de base de données créé
+SQL> Desc USER_DB_LINKS
+ Nom								NULL ?    Type
+ ---------------------------------- --------- -------------------------------
+ DB_LINK                            NOT NULL  VARCHAR2(128)
+ USERNAME                                     VARCHAR2(30)
+ PASSWORD                                     VARCHAR2(30)
+ HOST                                         VARCHAR2(2000)
+ CREATED                            NOT NULL  DATE
+
+SQL> select * from aurlien_serveur.personnel@to_serveur;
+
+NOM                                      ROLE                                   
+---------------------------------------- --------------------                   
+Clovis                                   Jongleur                               
+Reine                                    Ecuyer                                 
+Louche                                   Clown                                  
+Benard                                   Equilibriste                           
+Bignon                                   Musicien                               
+Bordeau                                  Dompteur                               
+Jerry                                    Clown                                  
+Demare                                   Jongleur                               
+Fremez                                   Musicien                               
+Dolores                                  Jongleur                               
+Hebert                                   Jongleur                               
+
+NOM                                      ROLE                                   
+---------------------------------------- --------------------                   
+Sorel                                    Ecuyer                                 
+Loisel                                   Equilibriste                           
+Jeanne                                   Jongleur                               
+Sangtrespur                              Dompteur                               
+
+15 ligne(s) sélectionnée(s).
+
+SQL> select * from aurlien_serveur.accessoire@to_serveur;
+
+NOM                            COULEUR        VOLUME   RATELIER     CAMION      
+------------------------------ ---------- ---------- ---------- ----------      
+Ballon                         Rouge              ,3         15          5      
+Barre                          Blanc              ,6         19          5      
+Fouet                          Marron             ,2         11          3      
+Bicyclette a elephant          Vert               ,4         27          8      
+Trompette                      Rouge              ,2          2          1      
+Cercle magique                 Magique            ,2          1          1      
+Boule                          Cristal            ,2         88          1      
+Cage a Lions                   Noir               10          0          2      
+Chaise longue de lions         Bleu               ,9         11          5      
+Peigne de Chimpanze            Jaune              ,2         23          3      
+Etrier                                             0          0          0      
+
+11 ligne(s) sélectionnée(s).
+
+SQL> select * from aurlien_serveur.numero@to_serveur;
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les Zoupalas                   Jonglerie                                        
+Clovis                                                                          
+                                                                                
+Le coche infernal              Equitation                                       
+Reine                                                                           
+                                                                                
+Les fauves                     Clownerie                                        
+Louche                                                                          
+                                                                                
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les Smilers                    Equilibre                                        
+Benard                                                                          
+                                                                                
+La passoire magique            Lion                                             
+Bordeau                                                                         
+                                                                                
+Les Zozos                      Clownerie                                        
+Jerry                                                                           
+                                                                                
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les Tartarins                  Jonglerie                                        
+Demare                                                                          
+                                                                                
+
+7 ligne(s) sélectionnée(s).
+
+SQL> select * from aurlien_serveur.utilisation@to_serveur;
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Zoupalas                   Dolores                                          
+Ballon                                                                          
+                                                                                
+Les Zoupalas                   Hebert                                           
+Ballon                                                                          
+                                                                                
+Les Zoupalas                   Dolores                                          
+Barre                                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Le coche infernal              Jeanne                                           
+Bicyclette a elephant                                                           
+                                                                                
+Le coche infernal              Sorel                                            
+Fouet                                                                           
+                                                                                
+Les fauves                     Jerry                                            
+Trompette                                                                       
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Smilers                    Benard                                           
+Cercle magique                                                                  
+                                                                                
+Les Smilers                    Benard                                           
+Boule                                                                           
+                                                                                
+Les Smilers                    Loisel                                           
+Bicyclette a elephant                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+La passoire magique            Bordeau                                          
+Cage a Lions                                                                    
+                                                                                
+La passoire magique            Bordeau                                          
+Chaise longue de lions                                                          
+                                                                                
+Les Zozos                      Jerry                                            
+Bicyclette a elephant                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Zozos                      Jerry                                            
+Peigne de Chimpanze                                                             
+                                                                                
+Les Tartarins                  Jeanne                                           
+Bicyclette a elephant                                                           
+                                                                                
+Le coche infernal              Sangtrespur                                      
+Etrier                                                                          
+                                                                                
+
+15 ligne(s) sélectionnée(s).
+
+SQL> desc aurlien_serveur.personnel@to_serveur;
+ Nom                                       NULL ?   Type
+ ----------------------------------------- -------- ----------------------------
+ NOM                                       NOT NULL VARCHAR2(40)
+ ROLE                                               VARCHAR2(20)
+
+SQL> desc aurlien_serveur.accessoire@to_serveur;
+ Nom                                       NULL ?   Type
+ ----------------------------------------- -------- ----------------------------
+ NOM                                       NOT NULL VARCHAR2(30)
+ COULEUR                                            VARCHAR2(10)
+ VOLUME                                             NUMBER(4,1)
+ RATELIER                                           NUMBER(2)
+ CAMION                                             NUMBER(1)
+
+
+SQL> create synonym personnel_distant for aurlien_serveur.personnel@to_serveur;
+
+Synonyme créé.
+
+SQL> create synonym accessoire_distant for aurlien_serveur.accessoire@to_serveur;
+
+Synonyme créé.
+
+SQL> create synonym numero_distant for aurlien_serveur.numero@to_serveur;
+
+Synonyme créé.
+
+SQL> create synonym utilisation_distant for aurlien_serveur.utilisation@to_serveur;
+
+Synonyme créé.
+
+
+SQL> @C:\Users\Bouchakor\Documents\creer_cirque2;
+drop table  utilisation
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table  numero
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table  accessoire
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table personnel
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+
+Table créée.
+
+
+Table créée.
+
+
+Table créée.
+
+
+Table créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+SQL> commit;
+
+Validation effectuée.
+
+SQL> create view tout_personnel as select * from personnel union select * from personnel_distant;
+
+Vue créée.
+
+SQL> create view tout_accessoire as select * from accessoire union select * from accessoire_distant;
+
+Vue créée.
+
+
+SQL> create view tout_numero as select * from numero union select * from numero_distant;
+
+Vue créée.
+
+
+SQL> create view tout_utilisation as select * from utilisation union select * from utilisation_distant;
+
+Vue créée.
+
+SQL> select * from tout_personnel;
+
+NOM                                      ROLE                                   
+---------------------------------------- --------------------                   
+Benard                                   Equilibriste                           
+Bignon                                   Musicien                               
+Bordeau                                  Dompteur                               
+CALMETTES                                Musicien                               
+COLIGNON                                 Ecuyer                                 
+Clovis                                   Jongleur                               
+DA-SILVA                                 Musicien                               
+Demare                                   Jongleur                               
+Dolores                                  Jongleur                               
+Fremez                                   Musicien                               
+Hebert                                   Jongleur                               
+
+NOM                                      ROLE                                   
+---------------------------------------- --------------------                   
+Jeanne                                   Jongleur                               
+Jerry                                    Clown                                  
+LEBRAS                                   Equilibriste                           
+LEJEUNE                                  Ecuyer                                 
+Loisel                                   Equilibriste                           
+Louche                                   Clown                                  
+MARMOL                                   Clown                                  
+OLIVIER                                  Equilibriste                           
+PORCHERON                                Dompteur                               
+QUENTIN                                  Clown                                  
+Reine                                    Ecuyer                                 
+
+NOM                                      ROLE                                   
+---------------------------------------- --------------------                   
+Sangtrespur                              Dompteur                               
+Sorel                                    Ecuyer                                 
+VASSEUR                                  Jongleur                               
+
+25 ligne(s) sélectionnée(s).
+
+SQL> select * from tout_accessoire;
+
+NOM                            COULEUR        VOLUME   RATELIER     CAMION      
+------------------------------ ---------- ---------- ---------- ----------      
+Ballon                         Rouge              ,3         15          5      
+Barre                          Blanc              ,6         19          5      
+Bicyclette a elephant          Vert               ,4         27          8      
+Boule                          Cristal            ,2         88          1      
+Cage a Lions                   Noir               10          0          2      
+Cercle magique                 Magique            ,2          1          1      
+Chaise longue de lions         Bleu               ,9         11          5      
+Etrier                                             0          0          0      
+Fouet                          Marron             ,2         11          3      
+Peigne de Chimpanze            Jaune              ,2         23          3      
+Trompette                      Rouge              ,2          2          1      
+
+11 ligne(s) sélectionnée(s).
+
+SQL> select * from tout_numero;
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+La passoire magique            Lion                                             
+Bordeau                                                                         
+                                                                                
+Le coche infernal              Equitation                                       
+MARMOL                                                                          
+                                                                                
+Le coche infernal              Equitation                                       
+Reine                                                                           
+                                                                                
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les Smilers                    Equilibre                                        
+Benard                                                                          
+                                                                                
+Les Smilers                    Equilibre                                        
+CALMETTES                                                                       
+                                                                                
+Les Tartarins                  Jonglerie                                        
+Demare                                                                          
+                                                                                
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les Zoupalas                   Jonglerie                                        
+Clovis                                                                          
+                                                                                
+Les Zoupalas                   Jonglerie                                        
+VASSEUR                                                                         
+                                                                                
+Les Zozos                      Clownerie                                        
+Jerry                                                                           
+                                                                                
+
+TITRE                          NATURE                                           
+------------------------------ --------------------                             
+RESPONSABLE                                                                     
+----------------------------------------                                        
+Les fauves                     Clownerie                                        
+Louche                                                                          
+                                                                                
+Les fauves                     Clownerie                                        
+OLIVIER                                                                         
+                                                                                
+
+11 ligne(s) sélectionnée(s).
+
+SQL> select * from tout_utilisation;
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+La passoire magique            Bordeau                                          
+Cage a Lions                                                                    
+                                                                                
+La passoire magique            Bordeau                                          
+Chaise longue de lions                                                          
+                                                                                
+Le coche infernal              Jeanne                                           
+Bicyclette a elephant                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Le coche infernal              MARMOL                                           
+Ballon                                                                          
+                                                                                
+Le coche infernal              Sangtrespur                                      
+Etrier                                                                          
+                                                                                
+Le coche infernal              Sorel                                            
+Fouet                                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Smilers                    Benard                                           
+Boule                                                                           
+                                                                                
+Les Smilers                    Benard                                           
+Cercle magique                                                                  
+                                                                                
+Les Smilers                    LEJEUNE                                          
+Fouet                                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Smilers                    Loisel                                           
+Bicyclette a elephant                                                           
+                                                                                
+Les Smilers                    VASSEUR                                          
+Bicyclette a elephant                                                           
+                                                                                
+Les Tartarins                  Jeanne                                           
+Bicyclette a elephant                                                           
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Zoupalas                   Dolores                                          
+Ballon                                                                          
+                                                                                
+Les Zoupalas                   Dolores                                          
+Barre                                                                           
+                                                                                
+Les Zoupalas                   Hebert                                           
+Ballon                                                                          
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Zoupalas                   LEJEUNE                                          
+Ballon                                                                          
+                                                                                
+Les Zoupalas                   MARMOL                                           
+Trompette                                                                       
+                                                                                
+Les Zoupalas                   OLIVIER                                          
+Trompette                                                                       
+                                                                                
+
+TITRE                          UTILISATEUR                                      
+------------------------------ ----------------------------------------         
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Les Zozos                      Jerry                                            
+Bicyclette a elephant                                                           
+                                                                                
+Les Zozos                      Jerry                                            
+Peigne de Chimpanze                                                             
+                                                                                
+Les fauves                     Jerry                                            
+Trompette                                                                       
+                                                                                
+
+21 ligne(s) sélectionnée(s).
+
+SQL> update aurlien_serveur.accessoire@to_serveur set volume = volume + 0.1;
+
+11 ligne(s) mise(s) à jour.
+
+SQL> update accessoire set volume = volume + 0.1;
+
+11 ligne(s) mise(s) à jour.
+
+SQL> commit;
+
+Validation effectuée.
+
+SQL> select * from aurlien_serveur.accessoire@to_serveur;
+
+NOM                            COULEUR        VOLUME   RATELIER     CAMION      
+------------------------------ ---------- ---------- ---------- ----------      
+Ballon                         Rouge              ,4         15          5      
+Barre                          Blanc              ,7         19          5      
+Fouet                          Marron             ,3         11          3      
+Bicyclette a elephant          Vert               ,5         27          8      
+Trompette                      Rouge              ,3          2          1      
+Cercle magique                 Magique            ,3          1          1      
+Boule                          Cristal            ,3         88          1      
+Cage a Lions                   Noir             10,1          0          2      
+Chaise longue de lions         Bleu                1         11          5      
+Peigne de Chimpanze            Jaune              ,3         23          3      
+Etrier                                            ,1          0          0      
+
+11 ligne(s) sélectionnée(s).
+
+SQL> select * from accessoire;
+
+NOM                            COULEUR        VOLUME   RATELIER     CAMION      
+------------------------------ ---------- ---------- ---------- ----------      
+Ballon                         Rouge              ,4         15          5      
+Barre                          Blanc              ,7         19          5      
+Fouet                          Marron             ,3         11          3      
+Bicyclette a elephant          Vert               ,5         27          8      
+Trompette                      Rouge              ,3          2          1      
+Cercle magique                 Magique            ,3          1          1      
+Boule                          Cristal            ,3         88          1      
+Cage a Lions                   Noir             10,1          0          2      
+Chaise longue de lions         Bleu                1         11          5      
+Peigne de Chimpanze            Jaune              ,3         23          3      
+Etrier                                            ,1          0          0      
+
+11 ligne(s) sélectionnée(s).
+
+SQL> update tout_accessoire set volume = volume+ 0.2;
+update tout_accessoire set volume = volume+ 0.2
+       *
+ERREUR à la ligne 1 :
+ORA-01732: les manipulations de données sont interdites sur cette vue 
+
+
+SQL> alter table accessoire add constraint volume_ck check (volume <= 20);
+
+Table modifiée.
+
+SQL> alter table aurlien_serveur.accessoire@to_serveur add constraint volume_ck check (volume <= 20);
+alter table aurlien_serveur.accessoire@to_serveur add constraint volume_ck check (volume <= 20)
+                                       *
+ERREUR à la ligne 1 :
+ORA-02021: opérations DDL non autorisées pour base de données distante 
+
+
+SQL> insert into accessoire values ('Corde','Gris',21,15,5);
+insert into accessoire values ('Corde','Gris',21,15,5)
+*
+ERREUR à la ligne 1 :
+ORA-02290: violation de contraintes (ARNAUD_CLIENT.VOLUME_CK) de vérification 
+
+
+SQL> select distinct utilisateur from aurlien_serveur.utilisation@to_serveur where accessoire='Ballon';
+
+UTILISATEUR                                                                     
+----------------------------------------                                        
+Dolores                                                                         
+Hebert                                                                          
+
+                                            
+
+SQL> select distinct accessoire from aurlien_serveur.utilisation@to_serveur, aurlien_serveur.personnel@to_serveur where role='Jongleur' AND utilisateur=nom;
+
+ACCESSOIRE                                                                      
+------------------------------                                                  
+Barre                                                                           
+Ballon                                                                          
+Bicyclette a elephant                                                           
+
+
+SQL> SELECT utilisateur FROM aurlien_serveur.utilisation@to_serveur GROUP BY utilisateur HAVING COUNT(DISTINCT titre) > 1;
+
+UTILISATEUR                                                                     
+----------------------------------------                                        
+Jeanne                                                                          
+Jerry                                                                           
+
+                                                   
+SQL> SELECT COUNT (DISTINCT titre) FROM aurlien_serveur.utilisation@to_serveur, aurlien_serveur.accessoire@to_serveur WHERE couleur='Rouge';
+
+COUNT(DISTINCTTITRE)                                                            
+--------------------                                                            
+                   7     
+
+
+SQL> SELECT COUNT (DISTINCT nom), role FROM aurlien_serveur.personnel@to_serveur GROUP BY role;
+
+COUNT(DISTINCTNOM) ROLE                                                         
+------------------ --------------------                                         
+                 2 Clown                                                        
+                 2 Dompteur                                                     
+                 2 Ecuyer                                                       
+                 2 Equilibriste                                                 
+                 5 Jongleur                                                     
+                 2 Musicien                                                     
+
+6 ligne(s) sélectionnée(s).
+
+SQL> SELECT COUNT (DISTINCT titre), utilisateur from aurlien_serveur.utilisation@to_serveur GROUP BY utilisateur;
+
+COUNT(DISTINCTTITRE) UTILISATEUR                                                
+-------------------- ----------------------------------------                   
+                   1 Benard                                                     
+                   1 Bordeau                                                    
+                   1 Dolores                                                    
+                   1 Hebert                                                     
+                   2 Jeanne                                                     
+                   2 Jerry                                                      
+                   1 Loisel                                                     
+                   1 Sangtrespur                                                
+                   1 Sorel                                                      
+
+9 ligne(s) sélectionnée(s).
+
+                                                       
+
+SQL> exit
