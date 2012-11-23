@@ -1,0 +1,76 @@
+create type Tetudiant under Tpersonn_bis (faculte varchar(18), cycle varchar(18) );
+
+--on crée objet rel
+create table LePersonne_bis OF Tpersonne_bis;
+create table LesEtudiant OF Tetudiant;
+
+delete from LesEtudiants;
+delete frim LesPersonnes_bus;
+
+--insertion
+
+insert into LesPersonne_bis values ('11', 'DUTHEUIL', TPersonne('Mar','alain'), to_date('10/11/1996','DD/MM/AAAA'), NULL);
+
+--insere 2 autres tuples puis inserer dans les Etudiants
+
+insert into LesEtudiants values ('123', 'JALET', Tpersonne('Anne','Sylvie','Aude'), To_date('01/10/2000','DD/MM/AAAA'),null, 'HEC','MASTER');
+
+insert into LesEtudiant values ('200', 'DUFAN', Tpersonne('MARC','Greg'), To_date('12/12/1997','DD/MM/YYYY'),(select REF(p) from LesPersonne_bis p where p.num_p='123'), 'FAC','Licence');
+
+--interogation
+
+select p from LesPersonne_bis p;
+select p from LesEtudiant p where value(p) is of Tetudiant;
+
+--selection les personnes qui sont des etudiant
+
+select values(p) from LesPersonne_bis p;
+select p.num_p, p.nom_p values(p) from LesPersonnes_bis p;
+
+select p.nom_p from LesPersonnes_bis p;
+select e.nom from LesEtudiants e;
+
+select p.nom,p.prenom from LesPersonnes_bis p where 'Sylvie' IN (select * from TABLE(p.personnes));
+
+____________________________________________________________________________________________________
+
+
+Correction TP1
+
+1_executer les commandes
+
+2_Disctionnaire DESC DICTIONORY select table_name from dictionory;
+select ....
+
+3_ insertion par 2 méthodes avec /sans constructeur
+
+-> insert into people values('toto', '105865');
+->insert into personne_table ('Duran','1058666');
+->insert into personne_table (person('Dabet','06555'));
+
+4_ insert into job_table values ('engenierie',0,2000,4);
+insert into job_table values (job('operatio',1,1500,3));
+
+--interoger 
+
+select * from job_table;
+select j.jobtitle from job_table j;
+
+6_ create type street as object (sname varchar (30), snumber number,  flatnumber varchar(5));
+
+create type adresse AS object (street_and_number street, city varchar (30), postal_code varchar (8));
+
+create type int_adress as object (local_adress adress, country varchar(30));
+
+7_ drop type person force;
+drop table person_table force;
+
+8_ create type phone as object (homeph varchar(10), bureauph varchar(10), mobileph varchar(10));
+
+create type nome as object (first varchar(20), middle varchar(20), last varchar(20));
+
+create type person as object (pname name, pphone phone, padress int_adress);
+
+9_create table person_table of person;
+
+10_ insert into person_table values ( nom ('joques', 'dupen', 'jaque'), phone('161661','1511616','156515'), int_adress(adress(street('Fresis',3,'CD'),'le havre','rt041'),'fr'));

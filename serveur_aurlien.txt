@@ -1,0 +1,225 @@
+SQL> create user aurlien_serveur identified by aurlien;
+
+Utilisateur créé.
+SQL> grant dba to aurlien_serveur;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> connect aurlien_serveur
+Connecté.
+SQL> create user arnaud_client identified by arnaud
+  2  ;
+
+Utilisateur créé.
+
+SQL> grant connect, resource to arnaud_client;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> @C:\Users\Kelkol\Documents\creer_cirque1
+drop table  utilisation
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table  numero
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table  accessoire
+            *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+drop table personnel
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+
+Table créée.
+
+
+Table créée.
+
+
+Table créée.
+
+
+Table créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+
+1 ligne créée.
+
+SQL> grant select on aurlien_serveur.personnel to arnaud_client
+  2  ;
+  
+  SQL> connect system
+Connecté.
+SQL> grant dba to arnaud_client;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> commit;
+
+Validation effectuée.
+
+SQL> grant select on aurlien_serveur.accessoire to arnaud_client;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> grant select on aurlien_serveur.numero to arnaud_client;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> grant select on aurlien_serveur.utilisation to arnaud_client;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> exit
